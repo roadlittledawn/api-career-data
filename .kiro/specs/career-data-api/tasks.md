@@ -1,6 +1,6 @@
 # Implementation Plan
 
-- [-] 1. Initialize project structure and dependencies
+- [x] 1. Initialize project structure and dependencies
 
   - Create package.json with Fastify, Mercurius, MongoDB, Anthropic SDK, and TypeScript dependencies
   - Configure TypeScript with tsconfig.json for Node.js 20 and ES modules
@@ -8,7 +8,7 @@
   - Create directory structure: `src/`, `src/schema/`, `src/services/`, `src/middleware/`, `src/__tests__/`
   - _Requirements: 11.1_
 
-- [ ] 2. Implement authentication middleware
+- [-] 2. Implement authentication middleware
 
   - [ ] 2.1 Create API key validation middleware
     - Implement Fastify preHandler hook that extracts `X-API-Key` header
