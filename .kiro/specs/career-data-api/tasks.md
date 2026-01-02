@@ -8,9 +8,9 @@
   - Create directory structure: `src/`, `src/schema/`, `src/services/`, `src/middleware/`, `src/__tests__/`
   - _Requirements: 11.1_
 
-- [-] 2. Implement authentication middleware
+- [x] 2. Implement authentication middleware
 
-  - [ ] 2.1 Create API key validation middleware
+  - [x] 2.1 Create API key validation middleware
     - Implement Fastify preHandler hook that extracts `X-API-Key` header
     - Compare against `API_ACCESS_KEY` environment variable
     - Return 401 with appropriate error message on failure
@@ -19,14 +19,14 @@
     - **Property 9: Authentication Enforcement**
     - **Validates: Requirements 9.1, 9.3**
 
-- [ ] 3. Implement MongoDB service
+- [x] 3. Implement MongoDB service
 
-  - [ ] 3.1 Create MongoDB connection manager
+  - [x] 3.1 Create MongoDB connection manager
     - Implement connection caching for Lambda warm starts
     - Create `getCollection` helper for typed collection access
     - Handle connection errors gracefully
     - _Requirements: 10.3_
-  - [ ] 3.2 Implement CRUD operations for all entity types
+  - [x] 3.2 Implement CRUD operations for all entity types
     - Create generic repository functions: `findAll`, `findById`, `create`, `update`, `delete`
     - Implement sorting logic per entity type (experiences by startDate, skills by name, etc.)
     - Implement filter query building for each entity type
