@@ -5,9 +5,10 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && node scripts/bundle.js",
+    "build": "node scripts/bundle.js",
+    "build:check": "tsc --noEmit && node scripts/bundle.js",
     "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js",
+    "start": "node dist/index.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src --ext .ts",
@@ -32,6 +33,7 @@
     "mongodb": "^6.12.0"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.159",
     "@types/node": "^22.10.0",
     "esbuild": "^0.24.0",
     "fast-check": "^3.23.0",
