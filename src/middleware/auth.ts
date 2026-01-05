@@ -1,5 +1,6 @@
 // API key authentication middleware
 import { FastifyRequest, FastifyReply } from "fastify";
+import { logError, ErrorCodes } from "../utils/errors.js";
 
 export async function authMiddleware(
   request: FastifyRequest,
@@ -9,15 +10,42 @@ export async function authMiddleware(
   const expectedKey = process.env.API_ACCESS_KEY;
 
   if (!expectedKey) {
-    request.log.error("API_ACCESS_KEY environment variable is not set");
-    return reply.status(500).send({ error: "Server configuration error" });
+    logError(new Error("API_ACCESS_KEY environment variable is not set"), {
+      context: "auth-middleware",
+    });
+    return reply.status(500).send({
+      errors: [
+        {
+          message: "Server configuration error",
+          extensions: { code: ErrorCodes.INTERNAL_SERVER_ERROR },
+        },
+      ],
+    });
   }
 
   if (!apiKey) {
-    return reply.status(401).send({ error: "API key is required" });
+    return reply.status(401).send({
+      errors: [
+        {
+          message: "API key is required",
+          extensions: { code: ErrorCodes.UNAUTHENTICATED },
+        },
+      ],
+    });
   }
 
   if (apiKey !== expectedKey) {
-    return reply.status(401).send({ error: "Invalid API key" });
+    logError(new Error("Invalid API key provided"), {
+      context: "auth-middleware",
+      providedKeyLength: typeof apiKey === "string" ? apiKey.length : 0,
+    });
+    return reply.status(401).send({
+      errors: [
+        {
+          message: "Invalid API key",
+          extensions: { code: ErrorCodes.UNAUTHENTICATED },
+        },
+      ],
+    });
   }
 }
