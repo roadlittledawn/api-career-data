@@ -25,8 +25,13 @@ export async function connectToDatabase(): Promise<Db> {
   }
 
   const uri = process.env.MONGODB_URI;
+  const dbName = process.env.MONGODB_DB_NAME;
+
   if (!uri) {
     throw new Error("MONGODB_URI environment variable is not set");
+  }
+  if (!dbName) {
+    throw new Error("MONGODB_DB_NAME environment variable is not set");
   }
 
   try {
@@ -39,7 +44,7 @@ export async function connectToDatabase(): Promise<Db> {
       await cachedClient.connect();
     }
 
-    cachedDb = cachedClient.db();
+    cachedDb = cachedClient.db(dbName);
     return cachedDb;
   } catch (error) {
     // Reset cached values on connection failure
