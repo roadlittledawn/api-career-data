@@ -6,6 +6,14 @@ export async function authMiddleware(
   request: FastifyRequest,
   reply: FastifyReply
 ): Promise<void> {
+  // Skip authentication for GraphiQL interface and assets in development
+  if (
+    process.env.NODE_ENV !== "production" &&
+    request.url.startsWith("/graphiql")
+  ) {
+    return;
+  }
+
   const apiKey = request.headers["x-api-key"];
   const expectedKey = process.env.API_ACCESS_KEY;
 
