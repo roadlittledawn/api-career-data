@@ -11,7 +11,7 @@ on:
 # - LAMBDA_FUNCTION_NAME: Name of the Lambda function (default: career-data-api)
 
 env:
-  LAMBDA_FUNCTION_NAME: ${{ secrets.LAMBDA_FUNCTION_NAME || 'career-data-api' }}
+  LAMBDA_FUNCTION_NAME: ${{ secrets.LAMBDA_FUNCTION_NAME }}
 
 jobs:
   build:
