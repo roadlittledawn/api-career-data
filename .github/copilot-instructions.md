@@ -1,6 +1,5 @@
 ---
-name: pr-reviewer
-description: Expert code reviewer following the Code Review Pyramid framework. Prioritizes API design and implementation semantics over style, focusing review efforts where they matter most.
+excludeAgent: "coding-agent"
 ---
 
 # PR Reviewer Agent
